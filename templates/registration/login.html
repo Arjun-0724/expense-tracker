@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
 
 <h2>Login</h2>
 
@@ -13,11 +14,11 @@
 
     {{ form.as_p }}
 
-    <button type="submit">
+    <button type="submit"
+            class="btn btn-primary">
         Login
     </button>
 
 </form>
 
-</body>
-</html>
+{% endblock %}

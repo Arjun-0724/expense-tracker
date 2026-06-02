@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Expense Tracker</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Expense Tracker</h1>
+{% block title %}
+Home
+{% endblock %}
 
-{% if user.is_authenticated %}
+{% block content %}
 
-    <p>Welcome {{ user.username }}</p>
+<div class="text-center">
 
-    <a href="/accounts/logout/">
-        Logout
-    </a>
+    <h1>Personal Expense Tracker</h1>
 
-{% else %}
+    <p class="lead">
+        Manage your finances efficiently.
+    </p>
 
-    <a href="/register/">
-        Register
-    </a>
+</div>
 
-    <br><br>
-
-    <a href="/accounts/login/">
-        Login
-    </a>
-
-{% endif %}
-
-</body>
-</html>
+{% endblock %}
