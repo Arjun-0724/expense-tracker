@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Home
-{% endblock %}
-
 {% block content %}
 
 <div class="text-center">
@@ -13,6 +9,17 @@ Home
     <p class="lead">
         Manage your finances efficiently.
     </p>
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'transaction_list' %}"
+           class="btn btn-primary">
+
+           View Transactions
+
+        </a>
+
+    {% endif %}
 
 </div>
 

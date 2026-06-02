@@ -10,4 +10,7 @@ urlpatterns = [
     ),
 
     path('', include('accounts.urls')),
+    
+    
+    path('transactions/', include('transactions.urls')),
 ]
