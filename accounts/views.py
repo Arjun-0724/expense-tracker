@@ -6,6 +6,8 @@ from django.db.models import Sum
 from transactions.models import Transaction
 import json
 from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+
 @login_required
 def home(request):
 
@@ -47,6 +49,26 @@ def home(request):
         for item in category_expenses
     ]
     # 
+    monthly_expenses = (
+    Transaction.objects.filter(
+        user=request.user,
+        transaction_type='expense'
+    )
+    .annotate(month=TruncMonth('transaction_date'))
+    .values('month')
+    .annotate(total=Sum('amount'))
+    .order_by('month')
+    
+    )
+    month_labels = [
+        item['month'].strftime('%b %Y')
+        for item in monthly_expenses
+    ]
+    month_totals = [
+        float(item['total'])
+        for item in monthly_expenses
+    ]
+    # 
     context = {
         'total_income': total_income,
         'total_expenses': total_expenses,
@@ -55,6 +77,9 @@ def home(request):
         
         'category_labels': json.dumps(category_labels),
         'category_totals': json.dumps(category_totals),
+        
+        'month_labels': json.dumps(month_labels),
+    'month_totals': json.dumps(month_totals),
     }
 
     return render(
