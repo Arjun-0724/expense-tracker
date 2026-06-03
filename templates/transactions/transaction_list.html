@@ -23,6 +23,7 @@ Transactions
             <th>Category</th>
             <th>Account</th>
             <th>Amount</th>
+            <th>Actions</th>
         </tr>
 
     </thead>
@@ -52,7 +53,12 @@ Transactions
             <td>
                 ₹{{ transaction.amount }}
             </td>
-
+<td>
+    <a href="{% url 'edit_transaction' transaction.id %}"
+       class="btn btn-sm btn-primary">
+       Edit
+    </a>
+</td>
         </tr>
 
     {% empty %}
