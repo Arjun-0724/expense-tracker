@@ -19,6 +19,10 @@
         <div class="ms-auto">
           {% if user.is_authenticated %}
             <span class="text-white me-3">{{ user.username }}</span>
+            <a href="{% url 'home' %}"
+   class="btn btn-success me-2">
+    Dashboard
+</a>
             <a href="{% url 'transaction_list' %}" class="btn btn-info me-2">Transactions</a>
             <a href="/transactions/add/" class="btn btn-warning me-2">Add Transaction</a>
             <form method="post" action="{% url 'logout' %}" class="d-inline">

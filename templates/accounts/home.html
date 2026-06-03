@@ -1,26 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="text-center">
-
+  <div class="text-center">
     <h1>Personal Expense Tracker</h1>
 
-    <p class="lead">
-        Manage your finances efficiently.
-    </p>
+    <p class="lead">Manage your finances efficiently.</p>
 
     {% if user.is_authenticated %}
-
-        <a href="{% url 'transaction_list' %}"
-           class="btn btn-primary">
-
-           View Transactions
-
-        </a>
-
+      <a href="{% url 'transaction_list' %}" class="btn btn-primary">View Transactions</a>
     {% endif %}
-
-</div>
-
+  </div>
 {% endblock %}
