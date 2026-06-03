@@ -93,3 +93,26 @@ def edit_transaction(request, transaction_id):
         'transactions/edit_transaction.html',
         {'form': form}
     )    
+    
+@login_required
+def delete_transaction(request, transaction_id):
+
+    transaction = get_object_or_404(
+        Transaction,
+        id=transaction_id,
+        user=request.user
+    )
+
+    if request.method == "POST":
+
+        transaction.delete()
+
+        return redirect(
+            'transaction_list'
+        )
+
+    return render(
+        request,
+        'transactions/delete_transaction.html',
+        {'transaction': transaction}
+    )
