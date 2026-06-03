@@ -78,5 +78,58 @@ Dashboard
     </tbody>
 
 </table>
+<hr>
+<div class="card mt-4">
+    <div class="card-header">
+        Expenses by Category
+    </div>
+
+    <div class="card-body">
+        <div style="width:500px; height:400px; margin:auto;">
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const ctx =
+            document.getElementById(
+                'categoryChart'
+            );
+
+        console.log(ctx);
+
+        new Chart(ctx, {
+
+            type: 'pie',
+
+            data: {
+
+                labels:
+                    {{ category_labels|safe }},
+
+                datasets: [{
+
+                    data:
+                        {{ category_totals|safe }}
+
+                }]
+            }
+
+        });
+        
+
+    }
+);
+
+</script>
 
 {% endblock %}

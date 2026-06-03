@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from transactions.models import Transaction
-
+import json
+from django.db.models import Sum
 @login_required
 def home(request):
 
@@ -26,12 +27,34 @@ def home(request):
     recent_transactions = Transaction.objects.filter(
         user=request.user
     ).order_by('-transaction_date')[:5]
+    # 
+    category_expenses = (
+        Transaction.objects.filter(
+            user=request.user,
+            transaction_type='expense'
+        )
+        .values('category__name')
+        .annotate(total=Sum('amount'))
+        .order_by('-total')
+        )
+    category_labels = [
+    item['category__name']
+    for item in category_expenses
+    ]
 
+    category_totals = [
+        float(item['total'])
+        for item in category_expenses
+    ]
+    # 
     context = {
         'total_income': total_income,
         'total_expenses': total_expenses,
         'balance': balance,
         'recent_transactions': recent_transactions,
+        
+        'category_labels': json.dumps(category_labels),
+        'category_totals': json.dumps(category_totals),
     }
 
     return render(
