@@ -33,3 +33,9 @@ class BudgetForm(forms.ModelForm):
             )
         )
         
+fields = [
+    'category',
+    'amount',
+    'month',
+    'year'
+]

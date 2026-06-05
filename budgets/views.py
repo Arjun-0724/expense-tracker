@@ -61,17 +61,19 @@ def budget_list(request):
     budget_data = []
 
     for budget in budgets:
-
         spent = (
-            Transaction.objects.filter(
-                user=request.user,
-                category=budget.category,
-                transaction_type='expense'
-            ).aggregate(
-                total=Sum('amount')
-            )['total']
-            or 0
-        )
+    Transaction.objects.filter(
+        user=request.user,
+        category=budget.category,
+        transaction_type='expense',
+        transaction_date__month=budget.month,
+        transaction_date__year=budget.year
+    )
+    .aggregate(
+        total=Sum('amount')
+    )['total']
+    or 0
+)
 
         remaining = budget.amount - spent
 
