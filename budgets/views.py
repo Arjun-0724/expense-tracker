@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from django.db.models import Sum
+from transactions.models import Transaction
+from .models import Budget
 # Create your views here.
 from django.shortcuts import (
     render,
@@ -47,4 +49,53 @@ def add_budget(request):
         request,
         'budgets/add_budget.html',
         {'form': form}
+    )
+    
+@login_required
+def budget_list(request):
+
+    budgets = Budget.objects.filter(
+        user=request.user
+    )
+
+    budget_data = []
+
+    for budget in budgets:
+
+        spent = (
+            Transaction.objects.filter(
+                user=request.user,
+                category=budget.category,
+                transaction_type='expense'
+            ).aggregate(
+                total=Sum('amount')
+            )['total']
+            or 0
+        )
+
+        remaining = budget.amount - spent
+
+        percentage = (
+            spent / budget.amount * 100
+            if budget.amount > 0
+            else 0
+        )
+
+        budget_data.append({
+            'budget': budget,
+            'spent': spent,
+            'remaining': remaining,
+            'percentage': min(
+                percentage,
+                100
+            ),
+            'exceeded': spent > budget.amount
+        })
+
+    return render(
+        request,
+        'budgets/budget_list.html',
+        {
+            'budget_data': budget_data
+        }
     )

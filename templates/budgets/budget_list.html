@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Budgets
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Budget Overview
+</h1>
+
+<a href="{% url 'add_budget' %}"
+   class="btn btn-primary mb-3">
+
+    Add Budget
+
+</a>
+
+{% for item in budget_data %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h4>
+            {{ item.budget.category }}
+        </h4>
+
+        <p>
+            Budget:
+            ₹{{ item.budget.amount }}
+        </p>
+
+        <p>
+            Spent:
+            ₹{{ item.spent }}
+        </p>
+
+        <p>
+            Remaining:
+            ₹{{ item.remaining }}
+        </p>
+
+        <div class="progress mb-2">
+
+            <div
+                class="progress-bar"
+                role="progressbar"
+                style="
+                    width:
+                    {{ item.percentage }}%;
+                "
+            >
+
+                {{ item.percentage|floatformat:0 }}%
+
+            </div>
+
+        </div>
+
+        {% if item.exceeded %}
+
+        <div class="alert alert-danger">
+
+            Budget Exceeded
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>
+
+    No budgets created.
+
+</p>
+
+{% endfor %}
+
+{% endblock %}
