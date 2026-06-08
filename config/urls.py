@@ -18,4 +18,6 @@ urlpatterns = [
     
     path('reports/', include('reports.urls')),
     
+    path('finance/', include('finance.urls')),
+    
 ]

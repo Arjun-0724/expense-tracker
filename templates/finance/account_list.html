@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Accounts</h1>
+
+<a href="{% url 'add_account' %}"
+   class="btn btn-primary mb-3">
+
+    Add Account
+
+</a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Opening Balance</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for account in accounts %}
+
+        <tr>
+
+            <td>{{ account.name }}</td>
+
+            <td>{{ account.get_account_type_display }}</td>
+
+            <td>₹{{ account.opening_balance }}</td>
+
+            <td>
+
+                <a href="{% url 'edit_account' account.id %}"
+                   class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a href="{% url 'delete_account' account.id %}"
+                   class="btn btn-danger btn-sm">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

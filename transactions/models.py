@@ -2,25 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Account(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
-
-    name = models.CharField(max_length=100)
-
-    balance = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        default=0
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class Category(models.Model):
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -45,12 +30,12 @@ class Transaction(models.Model):
     )
 
     account = models.ForeignKey(
-        Account,
+        'finance.Account',
         on_delete=models.CASCADE
     )
 
     category = models.ForeignKey(
-        Category,
+        'Category',
         on_delete=models.CASCADE
     )
 

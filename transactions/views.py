@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import TransactionForm
-from .models import Account, Category, Transaction
+from .models import  Category, Transaction
+from finance.models import Account
 
 @login_required
 def add_transaction(request):
