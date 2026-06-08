@@ -8,5 +8,9 @@ urlpatterns = [
         views.report_view,
         name='report_view'
     ),
-
+    path(
+        'export_csv/',
+        views.export_csv,
+        name='export_csv'
+    ),
 ]

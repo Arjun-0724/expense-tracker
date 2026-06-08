@@ -23,7 +23,17 @@ Reports
     </button>
 
 </form>
+<br>
+{% if form.is_bound and form.is_valid %}
 
+<a href="{% url 'export_csv' %}?start_date={{ form.cleaned_data.start_date }}&end_date={{ form.cleaned_data.end_date }}"
+   class="btn btn-success">
+
+    Export CSV
+
+</a>
+
+{% endif %}
 <hr>
 
 {% if transactions %}
