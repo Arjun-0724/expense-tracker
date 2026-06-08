@@ -34,6 +34,14 @@ Reports
 </a>
 
 {% endif %}
+<br>
+<br>
+<a href="{% url 'export_excel' %}?start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
+   class="btn btn-success">
+
+    Export Excel
+
+</a>
 <hr>
 
 {% if transactions %}
