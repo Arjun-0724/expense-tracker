@@ -235,7 +235,6 @@ Reports
        class="btn-export btn-csv">
       ⬇ Export CSV
     </a>
-    {% endif %}
 
     <a href="{% url 'export_excel' %}?start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}"
        class="btn-export btn-excel">
@@ -246,6 +245,7 @@ Reports
        class="btn-export btn-pdf">
       ⬇ Export PDF
     </a>
+    {% endif %}
 
   </div>
 

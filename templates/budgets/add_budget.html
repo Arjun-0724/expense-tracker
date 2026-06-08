@@ -5,25 +5,82 @@ Add Budget
 {% endblock %}
 
 {% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh; padding: 2rem 0;">
+    <div class="card shadow-sm border-0 p-4" style="width: 100%; max-width: 520px; border-radius: 12px; background-color: #ffffff;">
+        
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-dark">Add Budget</h2>
+            <p class="text-muted small">Set up a new spending limit to stay on top of your financial goals.</p>
+        </div>
 
-<h1 class="mb-4">Add Budget</h1>
+        <form method="POST" class="needs-validation">
+            {% csrf_token %}
+            
+            <div class="django-form-wrapper mb-4">
+                {{ form.as_p }}
+            </div>
 
-<form method="POST">
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-lg fs-6 py-2 flex-grow-1" style="border-radius: 8px;">
+                    <i class="bi bi-piggy-bank me-1"></i> Save Budget
+                </button>
+                <a href="{% url 'budget_list' %}" class="btn btn-light border btn-lg fs-6 py-2 flex-grow-1 text-center text-muted" style="border-radius: 8px;">
+                    Cancel
+                </a>
+            </div>
+        </form>
 
-    {% csrf_token %}
+    </div>
+</div>
 
-    {{ form.as_p }}
-
-    <button type="submit"
-            class="btn btn-primary">
-        Save Budget
-    </button>
-
-    <a href="{% url 'budget_list' %}"
-       class="btn btn-secondary">
-        Cancel
-    </a>
-
-</form>
-
+<style>
+    .django-form-wrapper p {
+        margin-bottom: 1.25rem;
+    }
+    .django-form-wrapper label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        font-size: 0.9rem;
+    }
+    .django-form-wrapper input, 
+    .django-form-wrapper select, 
+    .django-form-wrapper textarea {
+        display: block;
+        width: 100%;
+        padding: 0.425rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+    .django-form-wrapper input:focus,
+    .django-form-wrapper select:focus,
+    .django-form-wrapper textarea:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #0d6efd; /* Blue focus ring to match btn-primary */
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+    }
+    .django-form-wrapper .helptext {
+        display: block;
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    .django-form-wrapper .errorlist {
+        list-style: none;
+        padding-left: 0;
+        color: #dc3545;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
 {% endblock %}

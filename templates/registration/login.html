@@ -5,20 +5,65 @@ Login
 {% endblock %}
 
 {% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="card shadow-sm border-0 p-4 style-card" style="width: 100%; max-width: 420px; border-radius: 12px;">
+        
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-dark">Login</h2>
+            <p class="text-muted small">Welcome back! Please enter your details.</p>
+        </div>
 
-<h2>Login</h2>
+        <form method="POST" class="needs-validation">
+            {% csrf_token %}
+            
+            <div class="django-form-wrapper mb-3">
+                {{ form.as_p }}
+            </div>
 
-<form method="POST">
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-primary btn-lg fs-6 py-2" style="border-radius: 8px;">
+                    Login
+                </button>
+            </div>
+        </form>
 
-    {% csrf_token %}
+    </div>
+</div>
 
-    {{ form.as_p }}
-
-    <button type="submit"
-            class="btn btn-primary">
-        Login
-    </button>
-
-</form>
-
+<style>
+    .django-form-wrapper p {
+        margin-bottom: 1.25rem;
+    }
+    .django-form-wrapper label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        font-size: 0.9rem;
+    }
+    .django-form-wrapper input {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 8px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    .django-form-wrapper input:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13, 110, 253, .25);
+    }
+</style>
 {% endblock %}
