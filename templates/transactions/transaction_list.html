@@ -38,8 +38,9 @@ Transactions
                 {{ transaction.transaction_date }}
             </td>
 
-            <td>
+            <td {% if transaction.transaction_type == 'expense' %} class="text-danger text-capitalize" {% else %} class="text-success text-capitalize" {% endif %}>
                 {{ transaction.transaction_type }}
+                
             </td>
 
             <td>
